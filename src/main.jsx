@@ -1,9 +1,32 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// 1. STYLE IMPORT (Crucial)
+import '@mysten/dapp-kit/dist/index.css';
+
+// 2. PROVIDER IMPORTS
+import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
+import { getFullnodeUrl } from '@mysten/sui/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// 3. SETUP
+const queryClient = new QueryClient();
+const networks = {
+  testnet: { url: getFullnodeUrl('testnet') },
+  mainnet: { url: getFullnodeUrl('mainnet') },
+};
+
+// 4. RENDER (The "Plugging In" Part)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <SuiClientProvider networks={networks} defaultNetwork="testnet">
+        <WalletProvider>
+          {/* Your App lives INSIDE these providers */}
+          <App />
+        </WalletProvider>
+      </SuiClientProvider>
+    </QueryClientProvider>
+  </React.StrictMode>,
+);

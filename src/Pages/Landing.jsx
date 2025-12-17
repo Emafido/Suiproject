@@ -1,4 +1,5 @@
 import '../App.css'
+import { Link } from 'react-router-dom';
 const Landing = () => {
   return (
     <div>
@@ -13,6 +14,9 @@ const Landing = () => {
           <li>Documentation</li> 
            </ul>       
         <button>Launch App</button>
+        <Link to="/dashboard">
+  <button>Launch App</button>
+</Link>
        
         <i className='sm:hidden'></i>
       </nav>
