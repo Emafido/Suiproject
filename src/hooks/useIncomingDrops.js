@@ -1,23 +1,59 @@
-import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
+import { useCurrentAccount, useSuiClientQuery, useSuiClient } from "@mysten/dapp-kit";
 import { PACKAGE_ID, MODULE_NAME } from "../constants";
+import { useQuery } from "@tanstack/react-query";
 
 export const useIncomingDrops = () => {
   const account = useCurrentAccount();
+  const client = useSuiClient();
 
-  // 1. Fetch ALL Drop Events
-  const { data, isPending, refetch } = useSuiClientQuery(
+  const { data: events, refetch: refetchEvents } = useSuiClientQuery(
     "queryEvents",
     {
       query: { MoveModule: { package: PACKAGE_ID, module: MODULE_NAME } },
       order: "descending",
     },
-    { enabled: !!account }
+    { enabled: !!account, refetchInterval: 3000 }
   );
 
-  // 2. Filter: Keep only drops where recipient == ME
-  const incomingDrops = data?.data
-    .map((event) => event.parsedJson)
-    .filter((json) => json.recipient === account?.address) || [];
+  const myIncomingEvents = events?.data
+    ?.filter((event) => {
+        const recipient = event.parsedJson?.recipient?.toLowerCase();
+        const myAddress = account?.address?.toLowerCase();
+        return recipient === myAddress;
+    })
+    .map((event) => ({ id: event.parsedJson.id })) || [];
 
-  return { incomingDrops, isPending, refetch };
+  const { data: incomingDrops, isPending, refetch: refetchLive } = useQuery({
+    queryKey: ["checkIncomingDrops", myIncomingEvents.length, account?.address],
+    queryFn: async () => {
+      if (myIncomingEvents.length === 0) return [];
+      
+      const objects = await client.multiGetObjects({ 
+        ids: myIncomingEvents.map(d => d.id), 
+        options: { showContent: true } 
+      });
+
+      return objects
+        .filter(obj => {
+          if (obj.error || !obj.data) return false;
+          const fields = obj.data.content.fields;
+          // --- THE CRITICAL FIX ---
+          // Hide packages that have been emptied
+          return parseInt(fields.balance) > 0;
+        })
+        .map(obj => {
+          const fields = obj.data.content.fields;
+          return {
+            id: obj.data.objectId,
+            sender: fields.sender,
+            balance: fields.balance, 
+            items: fields.items || [] 
+          };
+        });
+    },
+    enabled: myIncomingEvents.length > 0,
+    refetchInterval: 3000
+  });
+
+  return { incomingDrops: incomingDrops || [], isPending, refetch: () => { refetchEvents(); refetchLive(); } };
 };

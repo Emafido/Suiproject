@@ -21,17 +21,11 @@ export const useClaimDrop = () => {
       signAndExecute(
         { transaction: tx },
         {
-          onSuccess: (result) => {
-            if (onSuccess) onSuccess(result);
-          },
-          onError: (err) => {
-            console.error("Claim Error:", err);
-            if (onError) onError(err);
-          },
+          onSuccess: (result) => onSuccess && onSuccess(result),
+          onError: (err) => onError && onError(err),
         }
       );
     } catch (e) {
-      console.error(e);
       if (onError) onError(e);
     }
   };

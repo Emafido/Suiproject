@@ -6,60 +6,50 @@ export const useOutgoingDrops = () => {
   const account = useCurrentAccount();
   const client = useSuiClient();
 
-  // 1. Fetch "History" (All drops you ever created)
   const { data: events, refetch: refetchEvents } = useSuiClientQuery(
     "queryEvents",
     {
-      query: {
-        MoveModule: { package: PACKAGE_ID, module: MODULE_NAME },
-      },
+      query: { MoveModule: { package: PACKAGE_ID, module: MODULE_NAME } },
       order: "descending",
     },
-    { enabled: !!account, refetchInterval: 5000 }
+    { enabled: !!account, refetchInterval: 3000 }
   );
 
-  // 2. Filter History to find YOUR drops
   const myEventDrops = events?.data
-    ?.filter((event) => event.parsedJson.sender === account?.address)
-    .map((event) => ({
-      id: event.parsedJson.id,
-      recipient: event.parsedJson.recipient,
-      amount: event.parsedJson.amount,
-    })) || [];
+    ?.filter((event) => event.parsedJson?.sender === account?.address)
+    .map((event) => ({ id: event.parsedJson.id })) || [];
 
-  // 3. CHECK LIVENESS (Are they still valid? Or recalled?)
   const { data: liveDrops, isPending, refetch: refetchLive } = useQuery({
-    queryKey: ["checkLiveDrops", myEventDrops.length],
+    queryKey: ["checkLiveDrops", myEventDrops.length, account?.address],
     queryFn: async () => {
       if (myEventDrops.length === 0) return [];
       
-      // Ask the blockchain: "Do these objects still exist?"
-      const objectIds = myEventDrops.map(d => d.id);
       const objects = await client.multiGetObjects({ 
-        ids: objectIds, 
-        options: { showOwner: true } 
+        ids: myEventDrops.map(d => d.id), 
+        options: { showContent: true } 
       });
 
-      // Filter: Keep only objects that are NOT deleted (status === 'VersionFound')
-      // and map them back to the event data
-      const validIds = new Set(
-        objects
-          .filter(obj => obj.error == null && obj.data) // If error exists, object is deleted/missing
-          .map(obj => obj.data.objectId)
-      );
-
-      return myEventDrops.filter(d => validIds.has(d.id));
+      return objects
+        .filter(obj => {
+          if (obj.error || !obj.data) return false;
+          const fields = obj.data.content.fields;
+          // --- THE CRITICAL FIX ---
+          // If balance is 0, the package is empty/claimed. Hide it!
+          return parseInt(fields.balance) > 0;
+        })
+        .map(obj => {
+          const fields = obj.data.content.fields;
+          return {
+            id: obj.data.objectId,
+            recipient: fields.recipient,
+            balance: fields.balance, 
+            items: fields.items || [] 
+          };
+        });
     },
     enabled: myEventDrops.length > 0,
-    refetchInterval: 5000
+    refetchInterval: 3000
   });
 
-  return {
-    myDrops: liveDrops || [], // Return only the ones that exist
-    isPending,
-    refetch: () => {
-      refetchEvents();
-      refetchLive();
-    },
-  };
+  return { myDrops: liveDrops || [], isPending, refetch: () => { refetchEvents(); refetchLive(); } };
 };

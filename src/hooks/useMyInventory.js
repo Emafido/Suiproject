@@ -1,42 +1,30 @@
 import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
+import { PACKAGE_ID, MODULE_NAME } from "../constants";
 
 export const useMyInventory = () => {
   const account = useCurrentAccount();
+  
+  // 1. Get SUI Balance
+  const { data: balanceData } = useSuiClientQuery("getBalance", {
+    owner: account?.address,
+  }, { enabled: !!account });
 
-  // 1. Fetch SUI Balance
-  const { data: balanceData, refetch: refetchBalance } = useSuiClientQuery(
-    "getBalance",
-    { owner: account?.address },
-    { enabled: !!account }
-  );
-
-  // 2. Fetch Owned Objects (Items)
-  const { data: itemsData, refetch: refetchItems } = useSuiClientQuery(
+  // 2. Get Swords (Owned Objects)
+  const { data: items, refetch } = useSuiClientQuery(
     "getOwnedObjects",
     {
       owner: account?.address,
+      filter: { StructType: `${PACKAGE_ID}::${MODULE_NAME}::Sword` },
       options: { showContent: true },
-      filter: { MatchNone: [{ StructType: "0x2::coin::Coin" }] } 
     },
-    { enabled: !!account }
+    { enabled: !!account, refetchInterval: 5000 }
   );
 
-  // Helper: Format MIST to SUI
-  const balance = balanceData 
-    ? (parseInt(balanceData.totalBalance) / 1_000_000_000).toFixed(2) 
-    : "0.00";
-
   return {
-    balance,
-    items: itemsData?.data || [],
+    balance: (parseInt(balanceData?.totalBalance || 0) / 1_000_000_000).toFixed(2),
+    items: items?.data || [],
     address: account?.address,
     isConnected: !!account,
-    
-    // --- THIS IS THE FIX ---
-    // We combine both refetch functions into one
-    refetch: async () => {
-      await refetchBalance();
-      await refetchItems();
-    }
+    refetch
   };
 };

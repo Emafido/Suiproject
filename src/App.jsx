@@ -5,25 +5,32 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Import your Pages
 import Landing from './Pages/Landing';
 import Dashboard from './Pages/Dashboard';
-import CreateDrop from './Pages/CreateDrop'; // Make sure this file exists in Pages folder
+import CreateDrop from './Pages/CreateDrop'; 
 import Receiver from './Pages/Receiver';
+import History from './Pages/History';
+import Security from './Pages/Security';
+import HowItWorks from './Pages/HowItWorks';
+import Terms from './Pages/Terms';
+import Privacy from './Pages/Privacy';
+import Docs from './Pages/Docs'; // <--- NEW IMPORT
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* 1. The Home Page (Landing) */}
+        {/* --- LANDING & EDUCATIONAL ROUTES --- */}
         <Route path="/" element={<Landing />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/security" element={<Security />} />
+        <Route path="/terms" element={<Terms />} />
+<Route path="/privacy" element={<Privacy />} />
+        <Route path="/docs" element={<Docs />} /> {/* <--- NEW ROUTE */}
 
-        {/* 2. The Dashboard (Your Main Hub) */}
+        {/* --- APP CORE ROUTES --- */}
         <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* 3. The Create Page (Packing the Box) */}
         <Route path="/create" element={<CreateDrop />} />
-
-        {/* 4. The Receiver Page (Unlocking the Box) */}
         <Route path="/claim" element={<Receiver />} />
-        
+        <Route path="/history" element={<History />} />
       </Routes>
     </Router>
   );

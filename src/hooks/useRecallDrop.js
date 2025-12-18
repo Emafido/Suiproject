@@ -8,31 +8,19 @@ export const useRecallDrop = () => {
   const recallDrop = async ({ dropId, onSuccess, onError }) => {
     try {
       const tx = new Transaction();
-
-      // Call the Move function: recall_drop(drop_object)
-      // Note: We just pass the Object ID, and Sui knows to find the object.
       tx.moveCall({
         target: `${PACKAGE_ID}::${MODULE_NAME}::recall_drop`,
         arguments: [tx.object(dropId)],
       });
 
       signAndExecute(
+        { transaction: tx },
         {
-          transaction: tx,
-        },
-        {
-          onSuccess: (result) => {
-            console.log("Recall Success:", result);
-            if (onSuccess) onSuccess(result);
-          },
-          onError: (err) => {
-            console.error("Recall Failed:", err);
-            if (onError) onError(err);
-          },
+          onSuccess: (result) => onSuccess && onSuccess(result),
+          onError: (err) => onError && onError(err),
         }
       );
     } catch (e) {
-      console.error(e);
       if (onError) onError(e);
     }
   };

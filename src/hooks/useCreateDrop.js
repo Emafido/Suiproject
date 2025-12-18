@@ -12,62 +12,53 @@ export const useCreateDrop = () => {
 
       const tx = new Transaction();
 
-      // 1. Convert Amount to MIST (u64)
+      // 1. Handle Money
       const amountInMist = Math.floor(parseFloat(amount) * 1_000_000_000);
-      
-      // 2. Split the Coin from Gas
-      // This creates a NEW coin object with the specific amount
       const [splitCoin] = tx.splitCoins(tx.gas, [tx.pure.u64(amountInMist)]);
 
-      // 3. Prepare PIN
+      // 2. Prepare PIN
       const pinBytes = Array.from(new TextEncoder().encode(pin));
 
-      // 4. Manual Vector Building for Items (The Nuclear Option)
+      // 3. Manual Vector Building (Bypasses SDK bugs)
       const swordType = `${PACKAGE_ID}::${MODULE_NAME}::Sword`;
       const itemVector = tx.moveCall({
         target: `0x1::vector::empty`,
         typeArguments: [swordType],
       });
 
-      const itemsToPack = selectedItems || [];
-      for (const itemId of itemsToPack) {
+      (selectedItems || []).forEach(itemId => {
         tx.moveCall({
           target: `0x1::vector::push_back`,
           typeArguments: [swordType],
           arguments: [itemVector, tx.object(itemId)],
         });
-      }
+      });
 
-      // 5. THE MOVE CALL (Command 3)
-      // Arguments must match: payment, amount, recipient, pin_bytes, items
+      // 4. Create Drop
       tx.moveCall({
         target: `${PACKAGE_ID}::${MODULE_NAME}::create_drop`,
         arguments: [
-          splitCoin,                            // arg 0: The actual coin object
-          tx.pure.u64(amountInMist),            // arg 1: The u64 value
-          tx.pure.address(recipient),           // arg 2: Recipient address
-          tx.pure.vector("u8", pinBytes),       // arg 3: PIN hash source
-          itemVector                            // arg 4: Our built vector
+          splitCoin,
+          tx.pure.u64(amountInMist),
+          tx.pure.address(recipient),
+          tx.pure.vector("u8", pinBytes),
+          itemVector
         ],
       });
 
-      // 6. Cleanup: Explicitly set gas budget if auto-detect fails
-      tx.setGasBudget(100000000); // 0.1 SUI budget
+      // 5. Cleanup
+      tx.transferObjects([splitCoin], account.address);
+      tx.setGasBudget(100000000); 
 
       signAndExecute(
         { transaction: tx },
         {
-          onSuccess: (result) => {
-            if (onSuccess) onSuccess(result.digest);
-          },
-          onError: (err) => {
-            console.error("Transaction Error Details:", err);
-            if (onError) onError(err);
-          },
+          onSuccess: (result) => onSuccess && onSuccess(result.digest),
+          onError: (err) => onError && onError(err)
         }
       );
     } catch (e) {
-      console.error("Critical Hook Error:", e);
+      console.error("Create Hook Error:", e);
       if (onError) onError(e);
     }
   };
