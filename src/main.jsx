@@ -1,29 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-
-// 1. STYLE IMPORT (Crucial)
 import '@mysten/dapp-kit/dist/index.css';
-
-// 2. PROVIDER IMPORTS
 import { SuiClientProvider, WalletProvider } from '@mysten/dapp-kit';
 import { getFullnodeUrl } from '@mysten/sui/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import App from './App.jsx';
 
-// 3. SETUP
+
 const queryClient = new QueryClient();
+
 const networks = {
+  devnet: { url: getFullnodeUrl('devnet') }, // Define Devnet
   testnet: { url: getFullnodeUrl('testnet') },
   mainnet: { url: getFullnodeUrl('mainnet') },
 };
 
-// 4. RENDER (The "Plugging In" Part)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <SuiClientProvider networks={networks} defaultNetwork="testnet">
-        <WalletProvider>
-          {/* Your App lives INSIDE these providers */}
+      {/* FORCE THE APP TO USE DEVNET HERE vvv */}
+      <SuiClientProvider networks={networks} defaultNetwork="devnet">
+        <WalletProvider autoConnect={true}>
           <App />
         </WalletProvider>
       </SuiClientProvider>
