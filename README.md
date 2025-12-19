@@ -72,10 +72,11 @@ Contributions are what make the open-source community an amazing place to learn,
 
 ## Author Info
 **Emmanuel Emafido**
+
 **Ogunyemi Aliyah**
-- **Twitter**: [Follow Me](https://x.com/yourusername)
-- **LinkedIn**: [Connect with Me](https://linkedin.com/in/yourusername)
-- **Portfolio**: [Visit Website](https://yourportfolio.com)
+- **Twitter**: [Follow Me](https://x.com/EmmanuelEmafido))
+- **LinkedIn**: [Connect with Me](https://www.linkedin.com/in/emmanuel-emafido/)
+- **Portfolio**: [Visit Website](https://emafido-emmanuel.vercel.app/))
 
 ---
 
