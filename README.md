@@ -1,16 +1,86 @@
-# React + Vite
+# SuiSecureDrop 🛡️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+SuiSecureDrop is a professional, non-custodial decentralized protocol built on the Sui blockchain. It provides a secure "Pending State" for asset transfers, allowing users to send SUI and NFTs (artifacts) with PIN-based authentication. Unlike traditional transfers, this protocol grants senders the power to recall assets if they haven't been claimed, ensuring total peace of mind against human error or address typos.
 
-Currently, two official plugins are available:
+## Features
+- **Vault Encapsulation**: Assets are moved into a smart-contract-controlled object rather than directly to a recipient.
+- **PIN Protection**: Claims require a 4-digit PIN, which is hashed on-chain using SHA3-256 for maximum security.
+- **Atomic Recalls**: Senders can instantly pull back funds/items as long as the recipient has not yet claimed them.
+- **NFT Support**: Capability to send up to two artifacts (Move objects) alongside SUI in a single secure drop.
+- **Responsive Interface**: A sleek, high-tech dashboard designed for both desktop and mobile wallet browsers.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+Follow these steps to set up the development environment locally.
 
-## React Compiler
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Emafido/Suiproject.git
+   cd Suiproject
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. **Install Dependencies**
+   Ensure you have Node.js installed, then run:
+   ```bash
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+3. **Configure the Smart Contract**
+   The project is configured to run on the Sui Devnet. If you redeploy the Move contract, update the constants in `src/constants.js`:
+   ```javascript
+   export const PACKAGE_ID = "0xfd8f81488f21da9346b634f1a0a568ddd291745b9e1bd372c9d9b37d34c703de"; 
+   export const MODULE_NAME = "secure_drop";
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+4. **Launch the Development Server**
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+### 1. Connecting Your Wallet
+Launch the application and connect your Sui Wallet. If you are on mobile, use the internal browser within the Sui Wallet app to interact with the protocol.
+
+### 2. Creating a Secure Drop
+- Navigate to the **New Drop** section.
+- Input the recipient's Sui address and the amount of SUI you wish to lock.
+- (Optional) Select up to 2 items from your "Vault Artifacts" to include in the package.
+- Set a secret 4-digit PIN and click **Encrypt & Send**.
+
+### 3. Claiming a Package
+As a recipient, check your **Inbox**. You will see the incoming secure package. Enter the PIN provided to you by the sender and click **Unlock** to move the assets into your wallet.
+
+### 4. Recalling Funds
+If you sent a package to the wrong person or changed your mind, go to your **Dashboard**, locate the active delivery, and click **Recall Funds**. This transaction is atomic and returns everything to your wallet instantly.
+
+## Technologies Used
+| Technology | Purpose |
+| :--- | :--- |
+| [React 19](https://react.dev/) | Modern UI component architecture |
+| [Sui Move](https://sui.io/) | Smart contract logic and object-centric safety |
+| [@mysten/dapp-kit](https://sdk.mystenlabs.com/dapp-kit) | Wallet connectivity and blockchain interaction |
+| [Tailwind CSS](https://tailwindcss.com/) | Sleek, professional utility-first styling |
+| [Vite](https://vitejs.dev/) | High-performance frontend build tool |
+| [TanStack Query](https://tanstack.com/query) | Efficient blockchain data fetching and caching |
+
+## Contributing
+Contributions are what make the open-source community an amazing place to learn, inspire, and create.
+
+- 📥 **Submit Issues**: Found a bug? Open an issue with a detailed description.
+- 💡 **Feature Requests**: Have an idea to make the protocol better? Let us know.
+- 🔧 **Pull Requests**: Fork the repo, create your branch, and submit your improvements.
+
+## Author Info
+**Emmanuel Imafidon**
+- **Twitter**: [Follow Me](https://x.com/yourusername)
+- **LinkedIn**: [Connect with Me](https://linkedin.com/in/yourusername)
+- **Portfolio**: [Visit Website](https://yourportfolio.com)
+
+---
+
+![Sui](https://img.shields.io/badge/Sui-Blockchain-blue?style=for-the-badge&logo=sui)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+
+[![Readme was generated by Dokugen](https://img.shields.io/badge/Readme%20was%20generated%20by-Dokugen-brightgreen)](https://www.npmjs.com/package/dokugen)
