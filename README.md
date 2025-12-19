@@ -71,7 +71,8 @@ Contributions are what make the open-source community an amazing place to learn,
 - 🔧 **Pull Requests**: Fork the repo, create your branch, and submit your improvements.
 
 ## Author Info
-**Emmanuel Imafidon**
+**Emmanuel Emafido**
+**Ogunyemi Aliyah**
 - **Twitter**: [Follow Me](https://x.com/yourusername)
 - **LinkedIn**: [Connect with Me](https://linkedin.com/in/yourusername)
 - **Portfolio**: [Visit Website](https://yourportfolio.com)
