@@ -98,7 +98,7 @@ const Landing = () => {
       </div>
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 lg:pt-45  lg:min-h-screen flex items-center px-6 md:px-16 overflow-hidden">
+      <section className="relative pt-32  lg:min-h-screen flex items-center px-6 md:px-16 overflow-hidden">
         {/* Abstract Background Blur */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-100 rounded-full blur-[120px] opacity-50 -z-10"></div>
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-50 rounded-full blur-[120px] opacity-50 -z-10"></div>
