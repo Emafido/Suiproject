@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateDrop = () => {
   const { createDrop } = useCreateDrop();
-  const { items: myItems } = useMyInventory(); // Fetch your swords
+  const { items: myItems } = useMyInventory();
   const navigate = useNavigate();
 
   // Form States
@@ -13,18 +13,14 @@ const CreateDrop = () => {
   const [recipient, setRecipient] = useState("");
   const [pin, setPin] = useState("");
 
-  // This initializes as an empty array, so it is never undefined
   const [selectedItems, setSelectedItems] = useState([]);
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Logic to handle checking/unchecking items
   const toggleItem = (objectId) => {
     if (selectedItems.includes(objectId)) {
-      // Uncheck
       setSelectedItems(selectedItems.filter((id) => id !== objectId));
     } else {
-      // Check (with limit)
       if (selectedItems.length >= 2) {
         alert("You can only select up to 2 items!");
         return;
@@ -49,7 +45,7 @@ const CreateDrop = () => {
       amount,
       recipient,
       pin,
-      selectedItems, // <--- CRITICAL: Passing the array to the hook
+      selectedItems,
       onSuccess: (digest) => {
         setIsProcessing(false);
         alert(`SecureDrop Created with ${selectedItems.length} items!`);
@@ -64,7 +60,6 @@ const CreateDrop = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      {/* Back Button */}
       <div className="w-full max-w-md mb-4">
         <button
           onClick={() => navigate("/dashboard")}
@@ -75,16 +70,13 @@ const CreateDrop = () => {
       </div>
 
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
-        {/* Header */}
         <div className="bg-green-600 p-6 text-white text-center">
           <i className="fa-solid fa-gift text-4xl mb-2"></i>
           <h1 className="text-2xl font-bold">Create Care Package</h1>
           <p className="opacity-90">Send Cash + Up to 2 Items</p>
         </div>
 
-        {/* Form */}
         <div className="p-8 space-y-6">
-          {/* Recipient Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Recipient Address
@@ -98,7 +90,6 @@ const CreateDrop = () => {
             />
           </div>
 
-          {/* Amount Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Amount (SUI)
@@ -117,7 +108,6 @@ const CreateDrop = () => {
             </div>
           </div>
 
-          {/* Item Selector (The New Part) */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Select Items{" "}
@@ -152,7 +142,6 @@ const CreateDrop = () => {
             )}
           </div>
 
-          {/* PIN Input */}
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">
               Secret PIN
@@ -167,7 +156,6 @@ const CreateDrop = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             onClick={handleCreate}
             disabled={isProcessing}

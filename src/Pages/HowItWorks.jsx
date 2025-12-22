@@ -1,16 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-/**
- * HOW IT WORKS PAGE
- * Logic: Breaks down the "SuiSecureDrop" protocol into 3 digestible technical steps.
- * Focus: Security, Reversibility, and Decentralization.
- */
 const HowItWorks = () => {
   return (
     <div className="min-h-screen bg-white font-body text-gray-900 antialiased overflow-x-hidden pt-32 pb-20">
-      {/* --- ELITE NAVBAR (Static for this page) --- */}
-      <nav className="flex items-center px-6 md:px-16 py-6 w-full justify-between z-[100] border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
+      <nav className="flex items-center px-6 md:px-16 py-6 w-full justify-between z-100 border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
         <div className="flex gap-3 items-center">
           <div className="bg-green-600 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg shadow-green-100">
             <i className="fa-solid fa-vault text-white text-lg"></i>
@@ -28,7 +22,6 @@ const HowItWorks = () => {
       </nav>
 
       <div className="max-w-6xl mx-auto px-6">
-        {/* Hero Section */}
         <header className="mb-24 text-center lg:text-left">
           <h1 className="font-heading text-6xl md:text-8xl font-black text-gray-900 tracking-tightest leading-[0.9] mb-8">
             The Protocol <br />{" "}
@@ -40,7 +33,6 @@ const HowItWorks = () => {
           </p>
         </header>
 
-        {/* --- THE THREE-STEP FLOW --- */}
         <div className="space-y-32">
           {/* Step 1 */}
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -48,7 +40,7 @@ const HowItWorks = () => {
               <span className="font-heading font-black text-7xl md:text-9xl text-gray-100 leading-none">
                 01
               </span>
-              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest mt-[-2rem] mb-6">
+              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest -mt-8 mb-6">
                 Vault Encapsulation
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">
@@ -72,13 +64,12 @@ const HowItWorks = () => {
             </div>
           </section>
 
-          {/* Step 2 */}
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="lg:order-2">
               <span className="font-heading font-black text-7xl md:text-9xl text-gray-100 leading-none">
                 02
               </span>
-              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest mt-[-2rem] mb-6">
+              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest -mt-8 mb-6">
                 Conditional Ownership
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">
@@ -102,13 +93,12 @@ const HowItWorks = () => {
             </div>
           </section>
 
-          {/* Step 3 */}
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="font-heading font-black text-7xl md:text-9xl text-gray-100 leading-none">
                 03
               </span>
-              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest mt-[-2rem] mb-6">
+              <h2 className="font-heading font-black text-4xl text-gray-900 tracking-tightest -mt-8 mb-6">
                 Atomic Resolution
               </h2>
               <p className="text-gray-500 text-lg leading-relaxed mb-6">
@@ -134,14 +124,13 @@ const HowItWorks = () => {
           </section>
         </div>
 
-        {/* --- FOOTER CTA --- */}
         <div className="mt-40 text-center">
           <h3 className="font-heading font-black text-4xl mb-10">
             Ready to secure your first drop?
           </h3>
           <Link
             to="/dashboard"
-            className="bg-gray-900 text-white px-12 py-5 rounded-[2rem] font-black text-xl shadow-2xl hover:bg-black transition transform hover:scale-105 active:scale-95 inline-block"
+            className="bg-gray-900 text-white px-12 py-5 rounded-4xl font-black text-xl shadow-2xl hover:bg-black transition transform hover:scale-105 active:scale-95 inline-block"
           >
             Launch Application
           </Link>

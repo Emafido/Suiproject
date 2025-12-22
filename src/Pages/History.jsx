@@ -78,7 +78,6 @@ const History = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* --- HEADER & FILTERS --- */}
         <div className="pt-8 pb-6">
           <Link
             to="/dashboard"
@@ -92,7 +91,6 @@ const History = () => {
               Activity
             </h1>
 
-            {/* Responsive Filter Tabs */}
             <div className="flex bg-gray-200/50 p-1 rounded-xl w-fit">
               {["all", "sent", "received"].map((t) => (
                 <button
@@ -111,7 +109,6 @@ const History = () => {
           </div>
         </div>
 
-        {/* --- HISTORY LIST --- */}
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
           {isPending ? (
             <div className="p-20 text-center text-gray-400">
@@ -132,7 +129,6 @@ const History = () => {
                   key={idx}
                   className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 transition group"
                 >
-                  {/* Left: Icon & Info */}
                   <div className="flex items-center gap-4">
                     <div
                       className={`shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm border ${
@@ -157,7 +153,7 @@ const History = () => {
                       <p className="font-bold text-gray-800 text-lg truncate">
                         {item.type}
                       </p>
-                      <p className="text-xs text-gray-400 font-mono mt-0.5 truncate max-w-[180px] sm:max-w-none">
+                      <p className="text-xs text-gray-400 font-mono mt-0.5 truncate max-w-45 sm:max-w-none">
                         {item.party
                           ? item.isPositive
                             ? "From: "
@@ -175,7 +171,6 @@ const History = () => {
                     </div>
                   </div>
 
-                  {/* Right: Amount & Verify */}
                   <div className="flex flex-row sm:flex-col justify-between items-center sm:items-end border-t sm:border-t-0 pt-3 sm:pt-0">
                     <p
                       className={`text-xl font-black ${

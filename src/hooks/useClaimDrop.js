@@ -12,10 +12,7 @@ export const useClaimDrop = () => {
 
       tx.moveCall({
         target: `${PACKAGE_ID}::${MODULE_NAME}::claim_drop`,
-        arguments: [
-          tx.object(dropId),
-          tx.pure.vector("u8", pinBytes),
-        ],
+        arguments: [tx.object(dropId), tx.pure.vector("u8", pinBytes)],
       });
 
       signAndExecute(

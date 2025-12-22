@@ -13,18 +13,10 @@ import { useMyInventory } from "../hooks/useMyInventory";
 import { useOutgoingDrops } from "../hooks/useOutgoingDrops";
 import { useRecallDrop } from "../hooks/useRecallDrop";
 
-/**
- * DASHBOARD COMPONENT
- * Principles:
- * - Futuristic & Sleek (font-heading / Space Grotesk)
- * - Calming & Reassuring (font-body / Inter)
- * - Responsive Mobile Architecture (Side Drawer / Hamburger)
- */
 const Dashboard = () => {
   const account = useCurrentAccount();
   const isConnected = !!account;
 
-  // UI State: Controls the visibility of the mobile side-drawer
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const {
@@ -37,11 +29,6 @@ const Dashboard = () => {
   const { recallDrop } = useRecallDrop();
   const { mutate: signAndExecute } = useSignAndExecuteTransaction();
 
-  /**
-   * MINT DEMO ITEM
-   * Detailed Logic: Constructs a Sui Programmable Transaction Block (PTB)
-   * to call the Move module's mint function for sword NFTs.
-   */
   const mintDemoItem = () => {
     const tx = new Transaction();
     tx.moveCall({
@@ -69,11 +56,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16 font-body text-gray-900 antialiased overflow-x-hidden">
-      {/* --- NAVBAR ARCHITECTURE --- 
-          Designed for high-tech security feel with Space Grotesk logo.
-      */}
-      <nav className="flex items-center px-6 md:px-12 py-5 bg-white border-b border-gray-100 shadow-sm sticky top-0 z-[60] justify-between">
-        {/* BRAND IDENTITY: High-Tech Sleek */}
+      <nav className="flex items-center px-6 md:px-12 py-5 bg-white border-b border-gray-100 shadow-sm sticky top-0 z-60 justify-between">
         <div className="flex gap-3 items-center shrink-0">
           <div className="bg-green-600 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg shadow-green-100">
             <i className="fa-solid fa-vault text-white text-lg"></i>
@@ -83,7 +66,6 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* DESKTOP NAVIGATION: Calming & Organized */}
         <div className="hidden lg:flex gap-10 items-center text-xs font-black uppercase tracking-[0.2em] text-gray-400">
           <Link
             to="/dashboard"
@@ -100,7 +82,6 @@ const Dashboard = () => {
           <ConnectButton className="bg-gray-900 text-white rounded-xl px-6 py-2 hover:bg-black transition" />
         </div>
 
-        {/* MOBILE TRIGGER: Detailed Touch Target */}
         <button
           onClick={() => setIsMenuOpen(true)}
           className="lg:hidden w-12 h-12 flex items-center justify-center bg-gray-900 rounded-2xl text-white shadow-xl active:scale-90 transition"
@@ -109,15 +90,11 @@ const Dashboard = () => {
         </button>
       </nav>
 
-      {/* --- MOBILE SIDEBAR DRAWER --- 
-          Principles: User-Friendly full-screen navigation.
-      */}
       <div
-        className={`fixed inset-0 z-[100] transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-100 transition-all duration-500 lg:hidden ${
           isMenuOpen ? "visible" : "invisible"
         }`}
       >
-        {/* Reassuring Backdrop with Blur */}
         <div
           className={`absolute inset-0 bg-gray-900/60 backdrop-blur-md transition-opacity duration-500 ${
             isMenuOpen ? "opacity-100" : "opacity-0"
@@ -125,7 +102,6 @@ const Dashboard = () => {
           onClick={() => setIsMenuOpen(false)}
         />
 
-        {/* Side Menu Drawer */}
         <div
           className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-in-out p-8 flex flex-col ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -167,9 +143,8 @@ const Dashboard = () => {
             </Link>
           </nav>
 
-          {/* Wallet Integration inside Menu */}
           <div className="mt-auto space-y-6 pt-8 border-t border-gray-100">
-            <div className="p-6 bg-gray-50 rounded-[2rem] border border-gray-100">
+            <div className="p-6 bg-gray-50 rounded-4xl border border-gray-100">
               <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">
                 Connected Address
               </p>
@@ -183,7 +158,6 @@ const Dashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-12 pt-8 md:pt-12">
-        {/* --- IF NOT CONNECTED: SHOW HERO/INSTRUCTIONS --- */}
         {!isConnected ? (
           <div className="flex flex-col items-center justify-center text-center py-16 md:py-24 bg-white rounded-[3rem] border border-gray-100 shadow-2xl shadow-gray-200/40 px-6 animate-in fade-in duration-700">
             <div className="bg-green-50 w-24 h-24 rounded-[2.5rem] flex items-center justify-center mb-10 shadow-inner">
@@ -197,7 +171,7 @@ const Dashboard = () => {
               and manage your vault.
             </p>
 
-            <div className="w-full max-w-md bg-gray-50 rounded-[2rem] p-8 text-left border border-gray-100 mb-12">
+            <div className="w-full max-w-md bg-gray-50 rounded-4xl p-8 text-left border border-gray-100 mb-12">
               <p className="text-[11px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
                 <i className="fa-solid fa-mobile-screen"></i> Mobile
                 Instructions
@@ -233,16 +207,14 @@ const Dashboard = () => {
             <ConnectButton className="w-full md:w-auto bg-green-600 text-white px-16 py-5 rounded-[2.5rem] font-black text-xl shadow-xl shadow-green-100 active:scale-95 transition" />
           </div>
         ) : (
-          /* --- IF CONNECTED: SHOW DASHBOARD CONTENT --- */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 animate-in slide-in-from-bottom-8 duration-700">
-            {/* --- LEFT COLUMN: WALLET & INVENTORY --- */}
             <div className="lg:col-span-5 space-y-10">
               <div>
                 <p className="mb-4 text-xs font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
                   <i className="fa-solid fa-wallet text-gray-400"></i> Portfolio
                   Status
                 </p>
-                <div className="relative overflow-hidden border border-gray-700 rounded-[2.5rem] shadow-2xl p-10 md:p-12 bg-gradient-to-br from-gray-800 to-gray-900 text-white group">
+                <div className="relative overflow-hidden border border-gray-700 rounded-[2.5rem] shadow-2xl p-10 md:p-12 bg-linear-to-br from-gray-800 to-gray-900 text-white group">
                   <div className="absolute top-0 right-0 w-48 h-48 bg-green-500/10 blur-[80px] -mr-24 -mt-24 group-hover:bg-green-500/20 transition duration-700"></div>
                   <p className="text-gray-400 text-[10px] font-black uppercase tracking-[0.3em]">
                     Current Assets
@@ -274,7 +246,7 @@ const Dashboard = () => {
                     + MINT
                   </button>
                 </div>
-                <div className="grid grid-cols-1 gap-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                <div className="grid grid-cols-1 gap-4 max-h-100 overflow-y-auto pr-2 custom-scrollbar">
                   {items.length === 0 ? (
                     <div className="p-16 text-center border-2 border-dashed border-gray-100 rounded-[2.5rem] bg-white shadow-sm">
                       <p className="text-gray-400 text-sm font-bold italic">
@@ -285,7 +257,7 @@ const Dashboard = () => {
                     items.map((item) => (
                       <div
                         key={item.data.objectId}
-                        className="flex border border-gray-100 bg-white rounded-[2rem] shadow-sm p-6 items-center justify-between hover:border-green-300 transition-all group"
+                        className="flex border border-gray-100 bg-white rounded-4xl shadow-sm p-6 items-center justify-between hover:border-green-300 transition-all group"
                       >
                         <div className="flex items-center gap-5 overflow-hidden">
                           <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-2xl group-hover:rotate-12 transition-transform">
@@ -307,7 +279,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* --- RIGHT COLUMN: ACTIVE DROPS --- */}
             <div className="lg:col-span-7 space-y-10">
               <div className="flex justify-between items-center">
                 <p className="text-xs font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
@@ -316,7 +287,7 @@ const Dashboard = () => {
                 </p>
                 <Link
                   to="/create"
-                  className="flex items-center gap-3 bg-green-600 text-white px-8 py-3.5 rounded-[1.5rem] font-black text-xs shadow-2xl shadow-green-100 active:scale-95 transition transform"
+                  className="flex items-center gap-3 bg-green-600 text-white px-8 py-3.5 rounded-3xl font-black text-xs shadow-2xl shadow-green-100 active:scale-95 transition transform"
                 >
                   <i className="fa-solid fa-plus text-sm"></i>
                   <span className="tracking-widest">NEW DROP</span>

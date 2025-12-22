@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-white pb-20 font-body text-gray-900 antialiased">
-      {/* --- ELITE NAVBAR --- */}
-      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-[100] border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
+      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-100 border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
         <div className="flex gap-3 items-center">
           <div className="bg-green-600 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg shadow-green-100">
             <i className="fa-solid fa-shield-cat text-white text-lg"></i>
@@ -31,7 +30,6 @@ const Privacy = () => {
       </nav>
 
       <div className="max-w-5xl mx-auto px-5 md:px-16 pt-40">
-        {/* --- HERO HEADER --- */}
         <div className="text-center mb-24">
           <div className="inline-flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full mb-8">
             <i className="fa-solid fa-check-circle text-green-600 text-xs"></i>
@@ -48,9 +46,7 @@ const Privacy = () => {
           </p>
         </div>
 
-        {/* --- GRID CARDS --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          {/* Card 1: On-Chain Data */}
           <div className="bg-gray-50 p-10 rounded-[3rem] border border-gray-100 hover:border-gray-200 transition-colors duration-500">
             <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-8">
               <i className="fa-solid fa-link text-gray-900"></i>
@@ -68,7 +64,6 @@ const Privacy = () => {
             </p>
           </div>
 
-          {/* Card 2: Off-Chain Data */}
           <div className="bg-gray-900 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-48 h-48 bg-green-500/10 blur-[80px] -mr-20 -mt-20 group-hover:bg-green-500/20 transition duration-700"></div>
             <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-2xl mb-8 backdrop-blur-md">
@@ -89,7 +84,6 @@ const Privacy = () => {
           </div>
         </div>
 
-        {/* --- DETAILED LIST --- */}
         <div className="border-t border-gray-100 pt-20">
           <h4 className="font-heading font-black text-3xl mb-12 tracking-tightest">
             Data Collection Specifics

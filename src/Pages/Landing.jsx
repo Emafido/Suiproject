@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-/**
- * LANDING PAGE - SuiSecureDrop
- * Principles:
- * - High-Tech Financial Security (Space Grotesk)
- * - Calming & Reassuring (Inter + Smooth Blurs)
- * - Interactive & Responsive
- */
 const Landing = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white font-body text-gray-900 antialiased overflow-x-hidden">
-      {/* --- ELITE NAVBAR --- */}
-      <nav className="flex items-center px-6 md:px-16 py-6 w-full justify-between z-[100] border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
+      <nav className="flex items-center px-6 md:px-16 py-6 w-full justify-between z-100 border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
         <div className="flex gap-3 items-center">
           <div className="bg-green-600 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg shadow-green-100">
             <i className="fa-solid fa-vault text-white text-lg"></i>
@@ -24,7 +16,6 @@ const Landing = () => {
           </p>
         </div>
 
-        {/* Desktop Links */}
         <ul className="hidden lg:flex gap-12 text-[11px] font-black uppercase tracking-widest-xl text-gray-400">
           <li className="hover:text-green-600 transition">
             <Link to="/how-it-works">How it works</Link>
@@ -46,7 +37,6 @@ const Landing = () => {
           </Link>
         </div>
 
-        {/* Mobile Hamburger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="lg:hidden text-gray-900 text-2xl"
@@ -59,9 +49,8 @@ const Landing = () => {
         </button>
       </nav>
 
-      {/* --- MOBILE DRAWER --- */}
       <div
-        className={`fixed inset-0 z-[90] bg-white transition-transform duration-500 lg:hidden ${
+        className={`fixed inset-0 z-90 bg-white transition-transform duration-500 lg:hidden ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -90,16 +79,14 @@ const Landing = () => {
           <Link
             to="/dashboard"
             onClick={() => setIsMenuOpen(false)}
-            className="bg-green-600 text-white px-12 py-5 rounded-[2rem] font-black text-xl"
+            className="bg-green-600 text-white px-12 py-5 rounded-4xl font-black text-xl"
           >
             LAUNCH APP
           </Link>
         </div>
       </div>
 
-      {/* --- HERO SECTION --- */}
       <section className="relative py-30  lg:min-h-screen flex items-center px-6 md:px-16 overflow-hidden">
-        {/* Abstract Background Blur */}
         <div className="absolute top-1/4 -left-20 w-96 h-96 bg-green-100 rounded-full blur-[120px] opacity-50 -z-10"></div>
         <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-50 rounded-full blur-[120px] opacity-50 -z-10"></div>
 
@@ -125,14 +112,14 @@ const Landing = () => {
             <div className="flex flex-col sm:flex-row gap-6">
               <Link
                 to="/dashboard"
-                className="bg-gray-900 text-white px-10 py-5 rounded-[2rem] font-black text-lg shadow-2xl hover:bg-black transition flex items-center justify-center gap-3 group"
+                className="bg-gray-900 text-white px-10 py-5 rounded-4xl font-black text-lg shadow-2xl hover:bg-black transition flex items-center justify-center gap-3 group"
               >
                 Launch Application
                 <i className="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
               </Link>
               <Link
                 to="/docs"
-                className="bg-white border border-gray-100 text-gray-900 px-10 py-5 rounded-[2rem] font-black text-lg shadow-sm hover:bg-gray-50 transition flex items-center justify-center"
+                className="bg-white border border-gray-100 text-gray-900 px-10 py-5 rounded-4xl font-black text-lg shadow-sm hover:bg-gray-50 transition flex items-center justify-center"
               >
                 Read Documentation
               </Link>
@@ -159,7 +146,6 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* Hero Visual Mockup */}
           <div className="hidden lg:block relative">
             <div className="bg-gray-900 rounded-[4rem] p-10 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] rotate-2 border border-white/10">
               <div className="flex justify-between items-center mb-12">
@@ -186,7 +172,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* --- FEATURES SECTION --- */}
       <section className="bg-gray-50 py-32 px-6 md:px-16">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {[
@@ -224,7 +209,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
       <footer className="px-6 md:px-16 py-12 border-t border-gray-100">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex flex-col items-center md:items-start">

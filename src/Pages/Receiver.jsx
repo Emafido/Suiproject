@@ -19,32 +19,26 @@ const Receiver = () => {
 
     setLoadingId(dropId);
 
-    // .trim() removes the invisible mobile space
     claimDrop({
       dropId,
       pin: pin.trim(),
       onSuccess: () => {
-        // 1. Victory Animation
         confetti({
           particleCount: 150,
           spread: 70,
           colors: ["#10B981", "#3B82F6"],
         });
 
-        // 2. Alert User
         alert("🎉 Package Unlocked! Funds and items are now in your wallet.");
 
-        // 3. Clear Loading State
         setLoadingId(null);
 
-        // 4. Refresh List (Delay slightly to let blockchain update)
         setTimeout(() => {
           refetch();
         }, 1000);
       },
       onError: (e) => {
         console.error("Claim Error:", e);
-        // Detect specific error types if possible, otherwise generic
         alert("❌ Access Denied: Incorrect PIN or Transaction Failed.");
         setLoadingId(null);
       },
@@ -65,7 +59,6 @@ const Receiver = () => {
         </div>
 
         <div className="space-y-4">
-          {/* Loading Indicator */}
           {isPending && (
             <div className="text-center py-12 text-gray-400">
               <i className="fa-solid fa-circle-notch fa-spin text-2xl mb-2"></i>
@@ -73,7 +66,6 @@ const Receiver = () => {
             </div>
           )}
 
-          {/* Empty State */}
           {!isPending && incomingDrops.length === 0 && (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-12 text-center animate-in fade-in">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
@@ -92,13 +84,11 @@ const Receiver = () => {
             </div>
           )}
 
-          {/* Drops List */}
           {incomingDrops.map((drop) => (
             <div
               key={drop.id}
               className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 hover:border-green-400 transition animate-in slide-in-from-bottom-2"
             >
-              {/* Left: Package Info */}
               <div className="flex gap-4 items-center w-full md:w-auto">
                 <div className="bg-green-100 w-14 h-14 rounded-2xl flex items-center justify-center text-green-600 text-2xl shadow-sm">
                   <i className="fa-solid fa-gift"></i>
@@ -118,7 +108,6 @@ const Receiver = () => {
                 </div>
               </div>
 
-              {/* Right: Unlock Action */}
               <div className="flex gap-2 w-full md:w-auto bg-gray-50 p-2 rounded-xl">
                 <input
                   type="password"
@@ -133,7 +122,7 @@ const Receiver = () => {
                 <button
                   onClick={() => handleClaim(drop.id)}
                   disabled={loadingId === drop.id}
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-bold transition disabled:bg-gray-300 shadow-md min-w-[100px]"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-bold transition disabled:bg-gray-300 shadow-md min-w-25"
                 >
                   {loadingId === drop.id ? (
                     <i className="fa-solid fa-circle-notch fa-spin"></i>

@@ -5,7 +5,6 @@ const Docs = () => {
   const [activeSection, setActiveSection] = useState("introduction");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Data Structure for Documentation
   const sections = {
     introduction: {
       title: "Introduction",
@@ -17,7 +16,7 @@ const Docs = () => {
             "Pending State" for transactions, allowing for PIN-based
             authentication and sender recall.
           </p>
-          <div className="bg-gray-900 rounded-[2rem] md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden group">
+          <div className="bg-gray-900 rounded-4xl md:rounded-[3rem] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/10 blur-3xl -mr-10 -mt-10 group-hover:bg-green-500/20 transition duration-700"></div>
             <h4 className="font-heading font-black text-green-400 uppercase tracking-widest-xl text-[10px] mb-6">
               The Core Protocol
@@ -47,14 +46,14 @@ const Docs = () => {
             function.
           </p>
 
-          <div className="bg-gray-50 border border-gray-100 rounded-[2rem] md:rounded-[2.5rem] p-4 md:p-8 overflow-hidden">
+          <div className="bg-gray-50 border border-gray-100 rounded-4xl md:rounded-[2.5rem] p-4 md:p-8 overflow-hidden">
             <div className="flex gap-2 mb-4">
               <div className="w-2.5 h-2.5 rounded-full bg-red-300"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-300"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-green-300"></div>
             </div>
             <div className="overflow-x-auto custom-scrollbar">
-              <pre className="font-mono text-[11px] md:text-sm text-gray-700 leading-6 whitespace-pre min-w-[500px] md:min-w-0">
+              <pre className="font-mono text-[11px] md:text-sm text-gray-700 leading-6 whitespace-pre min-w-125 md:min-w-0">
                 {`// Sui Move function signature
 public entry fun create_drop<T: key + store>(
     coin: Coin<SUI>,
@@ -83,7 +82,7 @@ public entry fun create_drop<T: key + store>(
             capital.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-8 border border-green-100 bg-green-50/30 rounded-[2rem]">
+            <div className="p-8 border border-green-100 bg-green-50/30 rounded-4xl">
               <h5 className="font-heading font-black text-gray-900 text-xl mb-3 tracking-tighter">
                 Atomic Withdrawal
               </h5>
@@ -92,7 +91,7 @@ public entry fun create_drop<T: key + store>(
                 the vault and returns all SUI/NFTs in a single block.
               </p>
             </div>
-            <div className="p-8 border border-blue-100 bg-blue-50/30 rounded-[2rem]">
+            <div className="p-8 border border-blue-100 bg-blue-50/30 rounded-4xl">
               <h5 className="font-heading font-black text-gray-900 text-xl mb-3 tracking-tighter">
                 Non-Custodial
               </h5>
@@ -109,8 +108,7 @@ public entry fun create_drop<T: key + store>(
 
   return (
     <div className="min-h-screen bg-white pb-20 font-body text-gray-900 antialiased overflow-x-hidden">
-      {/* --- RESPONSIVE ELITE NAVBAR --- */}
-      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-[100] border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
+      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-100 border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
         <div className="flex gap-3 items-center">
           <div className="bg-green-600 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg shadow-green-100 transform -rotate-3 group cursor-pointer transition">
             <i className="fa-solid fa-vault text-white text-lg"></i>
@@ -121,7 +119,6 @@ public entry fun create_drop<T: key + store>(
         </div>
 
         <div className="flex gap-4 md:gap-8 items-center">
-          {/* HIDDEN ON MOBILE/TABLET (lg:block) */}
           <Link
             to="/"
             className="hidden lg:block text-[11px] font-black uppercase tracking-widest-xl text-gray-400 hover:text-gray-900 transition"
@@ -129,7 +126,6 @@ public entry fun create_drop<T: key + store>(
             Return Home
           </Link>
 
-          {/* HIDDEN ON MOBILE/TABLET (lg:block) */}
           <Link
             to="/dashboard"
             className="hidden lg:block bg-gray-900 text-white px-5 md:px-8 py-2.5 rounded-xl md:rounded-2xl font-black text-[10px] tracking-widest hover:bg-black transition shadow-xl"
@@ -137,7 +133,6 @@ public entry fun create_drop<T: key + store>(
             LAUNCH APP
           </Link>
 
-          {/* HAMBURGER (Visible on Mobile) */}
           <button
             onClick={() => setIsMenuOpen(true)}
             className="lg:hidden text-gray-900 text-xl"
@@ -147,9 +142,8 @@ public entry fun create_drop<T: key + store>(
         </div>
       </nav>
 
-      {/* --- MOBILE SIDEBAR DRAWER --- */}
       <div
-        className={`fixed inset-0 z-[120] lg:hidden transition-all duration-500 ${
+        className={`fixed inset-0 z-120 lg:hidden transition-all duration-500 ${
           isMenuOpen ? "visible" : "invisible"
         }`}
       >
@@ -193,7 +187,6 @@ public entry fun create_drop<T: key + store>(
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-16 pt-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-        {/* --- DESKTOP SIDE NAVIGATION --- */}
         <aside className="hidden lg:col-span-3 lg:block">
           <div className="sticky top-40">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-10 font-body">
@@ -233,7 +226,6 @@ public entry fun create_drop<T: key + store>(
           </div>
         </aside>
 
-        {/* --- MOBILE HORIZONTAL TABS (Mobile Only) --- */}
         <div className="lg:hidden flex overflow-x-auto gap-8 pb-4 border-b border-gray-100 no-scrollbar sticky top-24 bg-white/80 backdrop-blur-md pt-4 -mx-5 px-5 z-40">
           {Object.keys(sections).map((key) => (
             <button
@@ -248,21 +240,15 @@ public entry fun create_drop<T: key + store>(
           ))}
         </div>
 
-        {/* --- MAIN DOCUMENTATION CONTENT --- */}
         <main className="lg:col-span-9">
           <div className="max-w-4xl">
-            {/* Title with Fluid Typography */}
             <h1 className="font-heading font-black text-5xl sm:text-7xl lg:text-8xl xl:text-9xl tracking-tightest leading-none mb-10 md:mb-16 text-gray-900">
               {sections[activeSection].title}
               <span className="text-green-600">.</span>
             </h1>
 
-            {/* Section Content Rendering */}
-            <div className="min-h-[400px]">
-              {sections[activeSection].content}
-            </div>
+            <div className="min-h-100">{sections[activeSection].content}</div>
 
-            {/* Pagination Controls / Metadata */}
             <div className="mt-20 md:mt-32 pt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-6">
               <div className="flex flex-col items-center sm:items-start">
                 <p className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em] font-body">

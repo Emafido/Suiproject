@@ -17,7 +17,6 @@ const networks = {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* FORCE THE APP TO USE DEVNET HERE vvv */}
       <SuiClientProvider networks={networks} defaultNetwork="devnet">
         <WalletProvider autoConnect={true}>
           <App />

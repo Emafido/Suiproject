@@ -12,20 +12,18 @@ import Security from "./Pages/Security";
 import HowItWorks from "./Pages/HowItWorks";
 import Terms from "./Pages/Terms";
 import Privacy from "./Pages/Privacy";
-import Docs from "./Pages/Docs"; // <--- NEW IMPORT
+import Docs from "./Pages/Docs";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* --- LANDING & EDUCATIONAL ROUTES --- */}
         <Route path="/" element={<Landing />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/security" element={<Security />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
-        <Route path="/docs" element={<Docs />} /> {/* <--- NEW ROUTE */}
-        {/* --- APP CORE ROUTES --- */}
+        <Route path="/docs" element={<Docs />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<CreateDrop />} />
         <Route path="/claim" element={<Receiver />} />

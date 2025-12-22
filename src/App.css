@@ -1,13 +1,1 @@
 @import "tailwindcss";
-.bgcolor{
-  background-color:rgb(251, 240, 83);
-}
-.bcolor{
-  border-color:rgb(251, 240, 83);
-}
-.color{
-  color:rgb(251, 240, 83);
-}
-.red{
-  background-color: #ffcfcf;
-}

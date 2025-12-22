@@ -30,8 +30,7 @@ const Terms = () => {
 
   return (
     <div className="min-h-screen bg-white pb-20 font-body text-gray-900 antialiased">
-      {/* --- ELITE NAVBAR --- */}
-      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-[100] border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
+      <nav className="flex items-center px-5 md:px-16 py-6 w-full justify-between z-100 border-b border-gray-50 fixed top-0 bg-white/80 backdrop-blur-xl">
         <div className="flex gap-3 items-center">
           <div className="bg-gray-900 w-10 h-10 rounded-2xl flex items-center justify-center shadow-lg">
             <i className="fa-solid fa-scale-balanced text-white text-lg"></i>
@@ -57,7 +56,6 @@ const Terms = () => {
       </nav>
 
       <div className="max-w-7xl mx-auto px-5 md:px-16 pt-40 grid grid-cols-1 lg:grid-cols-12 gap-20">
-        {/* --- STICKY SIDEBAR --- */}
         <aside className="hidden lg:col-span-3 lg:block">
           <div className="sticky top-40">
             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-10">
@@ -81,7 +79,6 @@ const Terms = () => {
           </div>
         </aside>
 
-        {/* --- MAIN CONTENT --- */}
         <main className="lg:col-span-8">
           <h1 className="font-heading font-black text-6xl md:text-8xl tracking-tightest leading-none mb-12 text-gray-900">
             Terms of Service<span className="text-gray-300">.</span>
